@@ -8,7 +8,7 @@ tech-stack banners, slide-ready PNGs and animated intros.
 
 ![A sample of the icons](gallery/preview.svg)
 
-**[See all 189 icons in every theme →](gallery/README.md)**
+**[Website: search all 189 icons and build your stack →](https://hirusha-nikson.github.io/pro-icons-skill/)** · [Icon gallery on GitHub](gallery/README.md)
 
 ## What you can ask Claude
 
@@ -147,8 +147,8 @@ You need Node.js 20 or newer.
    npm run build
    ```
    This regenerates the tiles (`skills/dev-icons/tiles.bin`), the icon list, the
-   [gallery](gallery/README.md) and [`NOTICE.md`](skills/dev-icons/NOTICE.md).
-   Don't edit those generated files by hand.
+   [gallery](gallery/README.md), [`NOTICE.md`](skills/dev-icons/NOTICE.md) and the
+   website in `docs/`. Don't edit those generated files by hand.
 4. Check the skill still works and build the upload zip:
    ```bash
    python source/package_skill.py
@@ -175,6 +175,7 @@ You need Node.js 20 or newer.
 | `.claude-plugin/` | Makes the repo installable as a Claude Code plugin. |
 | `source/` | The icon list, build script and packaging script. Not part of the skill. |
 | `gallery/` | Browsable icon previews for GitHub. Not part of the skill. |
+| `docs/` | The GitHub Pages website, generated from `source/site/index.html` by `npm run build`. |
 | `.github/workflows/` | Checks the skill on every push and publishes releases. |
 
 All the tiles are packed into one file (`tiles.bin`) because claude.ai skill uploads

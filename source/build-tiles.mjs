@@ -34,13 +34,17 @@ function luminance(hex) {
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
-function tileSvg(icon, theme) {
+// [background, logo colour] for a tile; the website draws its tiles from these too
+function tileColors(icon, theme) {
   const brand = '#' + icon.hex;
   const L = luminance(icon.hex);
-  let bg, fg;
-  if (theme === 'dark')  { bg = DARK_BG;  fg = L < 0.12 ? '#FFFFFF' : brand; }
-  if (theme === 'light') { bg = LIGHT_BG; fg = L > 0.70 ? DARK_BG  : brand; }
-  if (theme === 'brand') { bg = brand;    fg = L > 0.50 ? '#000000' : '#FFFFFF'; }
+  if (theme === 'dark')  return [DARK_BG,  L < 0.12 ? '#FFFFFF' : brand];
+  if (theme === 'light') return [LIGHT_BG, L > 0.70 ? DARK_BG  : brand];
+  return [brand, L > 0.50 ? '#000000' : '#FFFFFF'];
+}
+
+function tileSvg(icon, theme) {
+  const [bg, fg] = tileColors(icon, theme);
   // icon paths are 24×24 → scale ×6 = 144px, centred in a 256px tile
   return `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="${esc(icon.title)}"><title>${esc(icon.title)}</title><rect width="256" height="256" rx="60" fill="${bg}"/><g transform="translate(56 56) scale(6)"><path d="${icon.path}" fill="${fg}"/></g></svg>`;
 }
@@ -48,6 +52,7 @@ function tileSvg(icon, theme) {
 const manifest = [];
 const missing = [];
 const licensed = [];   // icons with licence data, for NOTICE.md
+const siteIcons = [];  // compact icon data for the website (docs/index.html)
 // Skill uploads allow at most 200 files and no archives inside, so every tile is appended
 // to one plain binary file (tiles.bin) and tiles.json records where each one sits.
 const chunks = [];
@@ -85,6 +90,10 @@ for (const item of list) {
     guidelines: icon.guidelines || null
   });
   if (icon.license) licensed.push({ ...item, license: icon.license, source: icon.source, guidelines: icon.guidelines });
+  siteIcons.push({
+    id: item.id, n: item.name, c: item.category, a: item.aliases, l: icon.license ? icon.license.type : null,
+    p: icon.path, t: Object.fromEntries(THEMES.map(theme => [theme, tileColors(icon, theme)])),
+  });
 }
 
 fs.rmSync(path.join(SKILL, 'assets.zip'), { force: true });   // replaced by tiles.bin
@@ -156,6 +165,21 @@ for (const l of licensed) {
 }
 fs.writeFileSync(path.join(SKILL, 'NOTICE.md'), notice);
 fs.copyFileSync('LICENSE', path.join(SKILL, 'LICENSE.txt'));
+
+// docs/: the GitHub Pages site, built from source/site/index.html with the icon data inlined
+{
+  const DOCS = path.resolve('docs');
+  const version = JSON.parse(fs.readFileSync('.claude-plugin/plugin.json', 'utf8')).version;
+  const data = JSON.stringify({ version, icons: siteIcons }).replace(/</g, '\\u003c');
+  const page = fs.readFileSync('source/site/index.html', 'utf8')
+    .replace('__ICON_DATA__', () => data)
+    .replaceAll('__COUNT__', String(manifest.length))
+    .replaceAll('__VERSION__', version);
+  fs.mkdirSync(DOCS, { recursive: true });
+  fs.writeFileSync(path.join(DOCS, 'index.html'), page);
+  fs.copyFileSync('assets/banner.gif', path.join(DOCS, 'banner.gif'));
+  fs.writeFileSync(path.join(DOCS, '.nojekyll'), '');   // serve the files as-is, no Jekyll processing
+}
 
 console.log(`✔ Built ${manifest.length} icons × ${THEMES.length} themes → skills/dev-icons/tiles.bin + gallery/`);
 if (missing.length) console.log(`✘ Not found in Simple Icons:\n  - ${missing.join('\n  - ')}`);
