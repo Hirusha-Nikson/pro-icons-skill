@@ -1,0 +1,263 @@
+[
+  {
+    "id": "html",
+    "name": "HTML",
+    "category": "frontend",
+    "aliases": [
+      "html5"
+    ],
+    "hex": "#E34F26",
+    "source": "simple-icons"
+  },
+  {
+    "id": "css",
+    "name": "CSS",
+    "category": "frontend",
+    "aliases": [
+      "css3"
+    ],
+    "hex": "#663399",
+    "source": "simple-icons"
+  },
+  {
+    "id": "js",
+    "name": "JavaScript",
+    "category": "language",
+    "aliases": [
+      "javascript"
+    ],
+    "hex": "#F7DF1E",
+    "source": "simple-icons"
+  },
+  {
+    "id": "ts",
+    "name": "TypeScript",
+    "category": "language",
+    "aliases": [
+      "typescript"
+    ],
+    "hex": "#3178C6",
+    "source": "simple-icons"
+  },
+  {
+    "id": "py",
+    "name": "Python",
+    "category": "language",
+    "aliases": [
+      "python"
+    ],
+    "hex": "#3776AB",
+    "source": "simple-icons"
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "category": "language",
+    "aliases": [
+      "golang"
+    ],
+    "hex": "#00ADD8",
+    "source": "simple-icons"
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "category": "language",
+    "aliases": [],
+    "hex": "#000000",
+    "source": "simple-icons"
+  },
+  {
+    "id": "dotnet",
+    "name": ".NET",
+    "category": "language",
+    "aliases": [
+      "net",
+      "csharp-runtime"
+    ],
+    "hex": "#512BD4",
+    "source": "simple-icons"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "frontend",
+    "aliases": [
+      "reactjs"
+    ],
+    "hex": "#61DAFB",
+    "source": "simple-icons"
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "category": "frontend",
+    "aliases": [
+      "next"
+    ],
+    "hex": "#000000",
+    "source": "simple-icons"
+  },
+  {
+    "id": "vue",
+    "name": "Vue",
+    "category": "frontend",
+    "aliases": [
+      "vuejs"
+    ],
+    "hex": "#4FC08D",
+    "source": "simple-icons"
+  },
+  {
+    "id": "svelte",
+    "name": "Svelte",
+    "category": "frontend",
+    "aliases": [],
+    "hex": "#FF3E00",
+    "source": "simple-icons"
+  },
+  {
+    "id": "tailwind",
+    "name": "Tailwind CSS",
+    "category": "frontend",
+    "aliases": [
+      "tailwindcss"
+    ],
+    "hex": "#06B6D4",
+    "source": "simple-icons"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "backend",
+    "aliases": [
+      "node"
+    ],
+    "hex": "#5FA04E",
+    "source": "simple-icons"
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "cloud",
+    "aliases": [
+      "cf",
+      "workers"
+    ],
+    "hex": "#F38020",
+    "source": "simple-icons"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "cloud",
+    "aliases": [],
+    "hex": "#000000",
+    "source": "simple-icons"
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "devops",
+    "aliases": [],
+    "hex": "#2496ED",
+    "source": "simple-icons"
+  },
+  {
+    "id": "kubernetes",
+    "name": "Kubernetes",
+    "category": "devops",
+    "aliases": [
+      "k8s"
+    ],
+    "hex": "#326CE5",
+    "source": "simple-icons"
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "devops",
+    "aliases": [],
+    "hex": "#F03C2E",
+    "source": "simple-icons"
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "devops",
+    "aliases": [
+      "gh"
+    ],
+    "hex": "#181717",
+    "source": "simple-icons"
+  },
+  {
+    "id": "postgres",
+    "name": "PostgreSQL",
+    "category": "database",
+    "aliases": [
+      "postgresql",
+      "pg"
+    ],
+    "hex": "#4169E1",
+    "source": "simple-icons"
+  },
+  {
+    "id": "mongodb",
+    "name": "MongoDB",
+    "category": "database",
+    "aliases": [
+      "mongo"
+    ],
+    "hex": "#47A248",
+    "source": "simple-icons"
+  },
+  {
+    "id": "redis",
+    "name": "Redis",
+    "category": "database",
+    "aliases": [],
+    "hex": "#FF4438",
+    "source": "simple-icons"
+  },
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "category": "database",
+    "aliases": [],
+    "hex": "#3FCF8E",
+    "source": "simple-icons"
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "category": "design",
+    "aliases": [],
+    "hex": "#F24E1E",
+    "source": "simple-icons"
+  },
+  {
+    "id": "linux",
+    "name": "Linux",
+    "category": "os",
+    "aliases": [],
+    "hex": "#FCC624",
+    "source": "simple-icons"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "category": "ai",
+    "aliases": [],
+    "hex": "#191919",
+    "source": "simple-icons"
+  },
+  {
+    "id": "claude",
+    "name": "Claude",
+    "category": "ai",
+    "aliases": [],
+    "hex": "#D97757",
+    "source": "simple-icons"
+  }
+]

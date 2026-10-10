@@ -1,0 +1,25 @@
+{
+  "name": "pro-icons-skill",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node source/build-tiles.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hirusha-Nikson/pro-icons-skill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hirusha-Nikson/pro-icons-skill/issues"
+  },
+  "homepage": "https://github.com/Hirusha-Nikson/pro-icons-skill#readme",
+  "dependencies": {
+    "sharp": "^0.35.5",
+    "simple-icons": "^16.34.0"
+  }
+}
