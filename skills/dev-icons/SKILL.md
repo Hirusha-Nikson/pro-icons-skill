@@ -16,7 +16,7 @@ sizes also need Pillow (`pip install pillow`).
 
 | Path | Contents |
 |---|---|
-| `assets.zip` | Every tile: `icons/<theme>/<id>.svg` (256×256 SVG), plus `png/<theme>/128/<id>.png` and `png/<theme>/512/<id>.png`. Don't unzip it; the scripts read from it directly. |
+| `tiles.bin`, `tiles.json` | Every tile packed into one file: a 256×256 SVG plus 128px and 512px PNGs per icon and theme. Always get tiles through the scripts; don't read these files directly. |
 | `manifest.json` | Every icon: `id`, `name`, `category`, `aliases`, brand `hex`, `license`, `guidelines` |
 | `scripts/` | `find.py`, `compose.py`, `export.py`, `animate.py` |
 

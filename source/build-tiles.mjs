@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as si from 'simple-icons';
 import sharp from 'sharp';
-import { zipSync, strToU8 } from 'fflate';
 
 const SKILL = path.resolve('skills/dev-icons');
 const GALLERY = path.resolve('gallery');   // GitHub-only preview, NOT part of the skill
@@ -16,7 +15,6 @@ const THEMES = ['dark', 'light', 'brand'];
 const DARK_BG = '#242938';
 const LIGHT_BG = '#F4F2ED';
 const PNG_SIZES = [128, 512];          // 128 for docs, 512 for slides/video
-const ZIP_DATE = new Date('2020-01-01T00:00:00Z');  // fixed, so an unchanged rebuild gives an identical zip
 
 // relative brightness of a hex colour (0 = black, 1 = white)
 function luminance(hex) {
@@ -42,7 +40,17 @@ function tileSvg(icon, theme) {
 
 const manifest = [];
 const missing = [];
-const zipFiles = {};   // path inside assets.zip → [bytes, options]
+// Skill uploads allow at most 200 files and no archives inside, so every tile is appended
+// to one plain binary file (tiles.bin) and tiles.json records where each one sits.
+const chunks = [];
+const index = {};      // tile path → [byte offset, byte length]
+let offset = 0;
+function addTile(name, bytes) {
+  const buf = Buffer.from(bytes);
+  index[name] = [offset, buf.length];
+  chunks.push(buf);
+  offset += buf.length;
+}
 
 // the gallery is fully generated, so start it fresh each build
 fs.rmSync(GALLERY, { recursive: true, force: true });
@@ -54,11 +62,11 @@ for (const item of list) {
 
   for (const theme of THEMES) {
     const svg = tileSvg(icon, theme);
-    zipFiles[`icons/${theme}/${item.id}.svg`] = [strToU8(svg), { level: 9, mtime: ZIP_DATE }];
+    addTile(`icons/${theme}/${item.id}.svg`, svg);
     fs.writeFileSync(path.join(GALLERY, theme, `${item.id}.svg`), svg);
     for (const size of PNG_SIZES) {
       const png = await sharp(Buffer.from(svg)).resize(size, size).png().toBuffer();
-      zipFiles[`png/${theme}/${size}/${item.id}.png`] = [png, { level: 9, mtime: ZIP_DATE }];
+      addTile(`png/${theme}/${size}/${item.id}.png`, png);
     }
   }
   manifest.push({
@@ -70,7 +78,9 @@ for (const item of list) {
   });
 }
 
-fs.writeFileSync(path.join(SKILL, 'assets.zip'), zipSync(zipFiles));
+fs.rmSync(path.join(SKILL, 'assets.zip'), { force: true });   // replaced by tiles.bin
+fs.writeFileSync(path.join(SKILL, 'tiles.bin'), Buffer.concat(chunks));
+fs.writeFileSync(path.join(SKILL, 'tiles.json'), JSON.stringify(index));
 fs.writeFileSync(path.join(SKILL, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
 // gallery/README.md: GitHub renders this when someone opens the gallery folder
@@ -91,5 +101,5 @@ for (const cat of categories) {
 }
 fs.writeFileSync(path.join(GALLERY, 'README.md'), md);
 
-console.log(`✔ Built ${manifest.length} icons × ${THEMES.length} themes → skills/dev-icons/assets.zip + gallery/`);
+console.log(`✔ Built ${manifest.length} icons × ${THEMES.length} themes → skills/dev-icons/tiles.bin + gallery/`);
 if (missing.length) console.log(`✘ Not found in Simple Icons:\n  - ${missing.join('\n  - ')}`);

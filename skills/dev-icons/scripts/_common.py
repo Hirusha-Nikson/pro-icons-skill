@@ -1,9 +1,8 @@
-"""Shared helpers: load the manifest, resolve icon names, read tiles from assets.zip."""
+"""Shared helpers: load the manifest, resolve icon names, read tiles from tiles.bin."""
 import difflib
 import json
 import re
 import sys
-import zipfile
 from functools import lru_cache
 from pathlib import Path
 
@@ -66,19 +65,31 @@ def resolve_or_exit(names):
 
 
 @lru_cache(maxsize=None)
-def _assets():
-    """All tiles live in one zip (skill uploads allow few files); read them without unpacking."""
-    return zipfile.ZipFile(SKILL_DIR / "assets.zip")
+def _tile_index():
+    """tiles.json maps each tile path to [offset, length] inside tiles.bin.
+
+    All tiles are packed into that one plain file because skill uploads allow
+    at most 200 files and no archives inside the upload.
+    """
+    with open(SKILL_DIR / "tiles.json", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _read_tile(name):
+    offset, length = _tile_index()[name]
+    with open(SKILL_DIR / "tiles.bin", "rb") as f:
+        f.seek(offset)
+        return f.read(length)
 
 
 def read_svg(icon_id, theme):
     """The full SVG tile as text."""
-    return _assets().read(f"icons/{theme}/{icon_id}.svg").decode("utf-8")
+    return _read_tile(f"icons/{theme}/{icon_id}.svg").decode("utf-8")
 
 
 def read_png(icon_id, theme, size):
     """A pre-rendered PNG tile as bytes (size must be one of PNG_SIZES)."""
-    return _assets().read(f"png/{theme}/{size}/{icon_id}.png")
+    return _read_tile(f"png/{theme}/{size}/{icon_id}.png")
 
 
 def svg_inner(icon_id, theme):
