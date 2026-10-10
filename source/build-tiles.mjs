@@ -58,7 +58,10 @@ for (const item of list) {
   }
   manifest.push({
     id: item.id, name: item.name, category: item.category,
-    aliases: item.aliases, hex: '#' + icon.hex, source: 'simple-icons'
+    aliases: item.aliases, hex: '#' + icon.hex, source: 'simple-icons',
+    // null = Simple Icons has no licence data for this logo (which does NOT mean it's free to use)
+    license: icon.license ? icon.license.type : null,
+    guidelines: icon.guidelines || null
   });
 }
 
