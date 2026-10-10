@@ -1,8 +1,8 @@
 {
   "name": "pro-icons-skill",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Build tools for dev-icons, a skill that gives Claude tech and brand logo tiles",
   "type": "module",
   "scripts": {
     "build": "node source/build-tiles.mjs"
@@ -11,9 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/Hirusha-Nikson/pro-icons-skill.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["claude", "skill", "icons", "logos", "simple-icons", "tech-stack"],
+  "author": "H Nikson",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Hirusha-Nikson/pro-icons-skill/issues"
   },

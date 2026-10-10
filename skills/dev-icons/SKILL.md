@@ -1,6 +1,7 @@
 ---
 name: dev-icons
 description: Tech and brand logo icons (React, TypeScript, Python, Docker, Cloudflare, databases, AI tools and more) as ready-made rounded tiles in dark, light and brand-colour themes, with scripts to search them, combine them into tech-stack banners, export SVG/PNG files and make animated HTML. Use whenever the user wants logos or icons for technologies, frameworks, languages, tools or companies, for example a "tech stack" or "built with" section in a README, icons on slides or in a document, a skills section on a portfolio or CV, a website footer, or an animated logo intro for a video. Use it instead of drawing logos by hand or linking to external icon services.
+license: MIT for the code. Logos have their own licences, see NOTICE.md.
 ---
 
 # Dev Icons
@@ -19,6 +20,7 @@ sizes also need Pillow (`pip install pillow`).
 | `tiles.bin`, `tiles.json` | Every tile packed into one file: a 256×256 SVG plus 128px and 512px PNGs per icon and theme. Always get tiles through the scripts; don't read these files directly. |
 | `manifest.json` | Every icon: `id`, `name`, `category`, `aliases`, brand `hex`, `license`, `guidelines` |
 | `scripts/` | `find.py`, `compose.py`, `export.py`, `animate.py` |
+| `NOTICE.md`, `LICENSE.txt` | Credits, per-logo licences and sources; the code's MIT licence |
 
 **Themes**
 - `dark`: dark tile with the logo in its brand colour. The default, and the skillicons look.
@@ -139,6 +141,8 @@ are non-commercial only, `*-ND-*` (Tauri) forbids modified versions, `CC-BY-*` l
 require credit, `*-SA-*` licences require sharing under the same licence, and `custom`
 (webpack, Fedora) means the brand's own terms apply, so point to its guidelines link.
 If the user's project is commercial, flag non-commercial logos before using them.
+When the user needs credit or attribution text, take it from `NOTICE.md`, which lists
+every logo's licence and source.
 
 The logos are trademarks of their owners. Use them only to refer to the product or
 company (for example, "built with React"), never in a way that suggests the owner

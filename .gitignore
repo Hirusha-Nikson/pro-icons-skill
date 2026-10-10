@@ -1,2 +1,8 @@
 node_modules/
 __pycache__/
+
+# skill upload zip and files made while trying out the scripts in the repo root
+/*.zip
+/*.html
+/*.svg
+/*.png
