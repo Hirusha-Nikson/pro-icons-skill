@@ -38,10 +38,16 @@ doing anything else:
 
 ```bash
 python3 scripts/find.py react k8s "next.js" pg      # look up specific names
-python3 scripts/find.py --list                      # everything available
-python3 scripts/find.py --category database         # one category
+python3 scripts/find.py --list                      # all ids, grouped by category
+python3 scripts/find.py --category database         # ids in one category
 python3 scripts/find.py --categories                # category names and counts
 ```
+
+Look up the specific names the user gave; only use `--list` when they ask what's
+available or want suggestions. `--details` adds names, colours, aliases and licences
+to `--list` or `--category`, but it is long, so prefer looking up names instead.
+Get all icon information through `find.py`: don't open `manifest.json`, `tiles.json`
+or `tiles.bin` yourself, since they are large and the scripts already read them.
 
 Any script given an unknown name stops with an error and a "did you mean" suggestion.
 If an icon really isn't in the set, tell the user which ones are missing and carry on
@@ -125,15 +131,14 @@ screen-record it, or to load it as an HTML/web layer in their video tool.
 
 ## Licences and trademarks
 
-Licences vary by logo. Each icon's `license` field in `manifest.json` holds its licence
-(`find.py` shows it), and `null` means Simple Icons has no data, which does **not** mean the
-logo is free to use. When an icon the user picked has a restrictive licence, mention it
-once: `*-NC-*` licences (Vue, Sass, Tauri) are non-commercial only, `*-ND-*` (Tauri)
-forbids modified versions, `CC-BY-*` licences require credit, `*-SA-*` licences require
-sharing under the same licence, and `custom` (webpack, Fedora) means the brand's own terms
-apply, so point to its `guidelines` link. If the user's project is
-commercial, flag non-commercial logos before using them. The `guidelines` field links to
-the brand's own usage rules where one exists.
+Licences vary by logo. `find.py <name>` shows each icon's licence and, where one exists,
+a link to the brand's usage guidelines. When it shows no licence, Simple Icons has no
+licence data, which does **not** mean the logo is free to use. When an icon the user
+picked has a restrictive licence, mention it once: `*-NC-*` licences (Vue, Sass, Tauri)
+are non-commercial only, `*-ND-*` (Tauri) forbids modified versions, `CC-BY-*` licences
+require credit, `*-SA-*` licences require sharing under the same licence, and `custom`
+(webpack, Fedora) means the brand's own terms apply, so point to its guidelines link.
+If the user's project is commercial, flag non-commercial logos before using them.
 
 The logos are trademarks of their owners. Use them only to refer to the product or
 company (for example, "built with React"), never in a way that suggests the owner
