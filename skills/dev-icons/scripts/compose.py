@@ -7,11 +7,12 @@ Examples:
   (.png output needs Pillow; .svg output needs nothing)
 """
 import argparse
+import io
 import math
 import sys
 from pathlib import Path
 
-from _common import THEMES, png_path, require_pillow, resolve_or_exit, split_names, svg_inner
+from _common import THEMES, read_png, require_pillow, resolve_or_exit, split_names, svg_inner
 
 
 def layout(count, perline, size, gap):
@@ -46,7 +47,7 @@ def compose_png(icons, theme, size, gap, perline, out):
     width, height, positions = layout(len(icons), perline, size, gap)
     canvas = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     for icon, (x, y) in zip(icons, positions):
-        tile = Image.open(png_path(icon["id"], theme, 512)).convert("RGBA")
+        tile = Image.open(io.BytesIO(read_png(icon["id"], theme, 512))).convert("RGBA")
         tile = tile.resize((size, size), Image.LANCZOS)
         canvas.alpha_composite(tile, (x, y))
     canvas.save(out)

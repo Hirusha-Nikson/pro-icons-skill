@@ -9,25 +9,25 @@ Examples:
       -> ./icons/dark/react.png, ./icons/dark/react.svg, ./icons/light/... and so on
 """
 import argparse
-import shutil
+import io
 import sys
 from pathlib import Path
 
-from _common import PNG_SIZES, THEMES, png_path, resolve_or_exit, split_names, svg_path
+from _common import PNG_SIZES, THEMES, read_png, read_svg, resolve_or_exit, split_names
 
 
 def export_png(icon_id, theme, size, dest):
     if size in PNG_SIZES:
-        shutil.copyfile(png_path(icon_id, theme, size), dest)
+        dest.write_bytes(read_png(icon_id, theme, size))
         return
     try:
         from PIL import Image
     except ImportError:
         nearest = min(PNG_SIZES, key=lambda s: abs(s - size))
         print(f"warning: Pillow not installed, exporting {nearest}px instead of {size}px", file=sys.stderr)
-        shutil.copyfile(png_path(icon_id, theme, nearest), dest)
+        dest.write_bytes(read_png(icon_id, theme, nearest))
         return
-    Image.open(png_path(icon_id, theme, 512)).resize((size, size), Image.LANCZOS).save(dest)
+    Image.open(io.BytesIO(read_png(icon_id, theme, 512))).resize((size, size), Image.LANCZOS).save(dest)
 
 
 def main():
@@ -59,7 +59,7 @@ def main():
                 written.append(dest)
             if args.format in ("svg", "both"):
                 dest = folder / f"{icon['id']}.svg"
-                shutil.copyfile(svg_path(icon["id"], theme), dest)
+                dest.write_text(read_svg(icon["id"], theme), encoding="utf-8")
                 written.append(dest)
 
     for path in written:

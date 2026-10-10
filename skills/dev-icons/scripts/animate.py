@@ -17,7 +17,7 @@ import html
 import sys
 from pathlib import Path
 
-from _common import THEMES, resolve_or_exit, split_names, svg_path
+from _common import THEMES, read_svg, resolve_or_exit, split_names
 
 DEFAULT_BG = {"dark": "#0D1117", "light": "#FFFFFF", "brand": "#111318"}
 TEXT_COLOR = {"dark": "#E6EDF3", "light": "#1F2328", "brand": "#E6EDF3"}
@@ -98,7 +98,7 @@ def main():
     gap = round(args.size / 5)
     tiles = "\n".join(
         f'<div class="icon" style="--i:{i}" title="{html.escape(icon["name"])}">'
-        f'{svg_path(icon["id"], args.theme).read_text(encoding="utf-8")}</div>'
+        f'{read_svg(icon["id"], args.theme)}</div>'
         for i, icon in enumerate(icons)
     )
     title = args.title or ", ".join(icon["name"] for icon in icons)

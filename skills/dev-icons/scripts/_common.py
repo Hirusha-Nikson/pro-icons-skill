@@ -1,8 +1,10 @@
-"""Shared helpers: load the manifest, resolve icon names, locate tile files."""
+"""Shared helpers: load the manifest, resolve icon names, read tiles from assets.zip."""
 import difflib
 import json
 import re
 import sys
+import zipfile
+from functools import lru_cache
 from pathlib import Path
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
@@ -63,17 +65,25 @@ def resolve_or_exit(names):
     return found
 
 
-def svg_path(icon_id, theme):
-    return SKILL_DIR / "icons" / theme / f"{icon_id}.svg"
+@lru_cache(maxsize=None)
+def _assets():
+    """All tiles live in one zip (skill uploads allow few files); read them without unpacking."""
+    return zipfile.ZipFile(SKILL_DIR / "assets.zip")
 
 
-def png_path(icon_id, theme, size):
-    return SKILL_DIR / "png" / theme / str(size) / f"{icon_id}.png"
+def read_svg(icon_id, theme):
+    """The full SVG tile as text."""
+    return _assets().read(f"icons/{theme}/{icon_id}.svg").decode("utf-8")
+
+
+def read_png(icon_id, theme, size):
+    """A pre-rendered PNG tile as bytes (size must be one of PNG_SIZES)."""
+    return _assets().read(f"png/{theme}/{size}/{icon_id}.png")
 
 
 def svg_inner(icon_id, theme):
     """The tile's contents without its outer <svg> tag, for nesting inside another SVG."""
-    text = svg_path(icon_id, theme).read_text(encoding="utf-8")
+    text = read_svg(icon_id, theme)
     return text[text.index(">") + 1 : text.rindex("</svg>")]
 
 
