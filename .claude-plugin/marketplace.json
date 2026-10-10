@@ -1,0 +1,17 @@
+{
+  "name": "pro-icons",
+  "description": "Tech and brand logo tiles for Claude Code",
+  "owner": {
+    "name": "H Nikson",
+    "url": "https://github.com/Hirusha-Nikson"
+  },
+  "plugins": [
+    {
+      "name": "dev-icons",
+      "source": "./",
+      "description": "About 190 tech and brand logos as ready-made tiles, with scripts for tech-stack banners, slide-ready PNGs and animated intros.",
+      "category": "design",
+      "tags": ["icons", "logos", "tech-stack"]
+    }
+  ]
+}

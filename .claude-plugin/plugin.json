@@ -1,0 +1,14 @@
+{
+  "name": "dev-icons",
+  "displayName": "Dev Icons",
+  "version": "1.0.0",
+  "description": "About 190 tech and brand logos as ready-made tiles, with scripts for tech-stack banners, slide-ready PNGs and animated intros.",
+  "author": {
+    "name": "H Nikson",
+    "url": "https://github.com/Hirusha-Nikson"
+  },
+  "homepage": "https://github.com/Hirusha-Nikson/pro-icons-skill",
+  "repository": "https://github.com/Hirusha-Nikson/pro-icons-skill",
+  "license": "MIT",
+  "keywords": ["icons", "logos", "tech-stack", "readme", "slides", "simple-icons"]
+}

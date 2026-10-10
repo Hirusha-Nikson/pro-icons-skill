@@ -1,5 +1,6 @@
 node_modules/
 __pycache__/
+dist/
 
 # skill upload zip and files made while trying out the scripts in the repo root
 /*.zip

@@ -35,17 +35,33 @@ right script and gives you the file.
 
 You need **Code execution and file creation** turned on in Settings.
 
-1. Build the skill zip from a copy of this repo (you need Python 3):
-   ```bash
-   git clone https://github.com/Hirusha-Nikson/pro-icons-skill.git
-   cd pro-icons-skill
-   python -c "import shutil; shutil.make_archive('dev-icons', 'zip', root_dir='skills', base_dir='dev-icons')"
-   ```
+1. Download **[dev-icons.zip](https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip)**
+   from the latest release.
 2. In claude.ai, go to **Settings → Capabilities → Skills**, click **Upload skill** and
    choose `dev-icons.zip`.
 3. Make sure the skill is switched on, then start a new chat.
 
 ### Claude Code
+
+Install it as a plugin. In a Claude Code session, run:
+
+```
+/plugin marketplace add Hirusha-Nikson/pro-icons-skill
+/plugin install dev-icons@pro-icons
+```
+
+Or from your terminal:
+
+```bash
+claude plugin marketplace add Hirusha-Nikson/pro-icons-skill
+claude plugin install dev-icons@pro-icons
+```
+
+Start a new session afterwards so the skill is loaded. To get later versions, run
+`/plugin marketplace update pro-icons`, or turn on auto-update under **Marketplaces** in `/plugin`.
+
+<details>
+<summary>Install without the plugin system</summary>
 
 Copy the skill folder into your personal skills folder:
 
@@ -63,8 +79,8 @@ New-Item -ItemType Directory -Force "$HOME\.claude\skills"
 Copy-Item -Recurse pro-icons-skill\skills\dev-icons "$HOME\.claude\skills\"
 ```
 
-To share it with a team, put it in a project's `.claude/skills/` folder instead. Start a
-new Claude Code session afterwards so the skill is loaded.
+To share it with a team, put it in a project's `.claude/skills/` folder instead.
+</details>
 
 ## Using the scripts yourself
 
@@ -111,14 +127,33 @@ You need Node.js 20 or newer.
    This regenerates the tiles (`skills/dev-icons/tiles.bin`), the icon list, the
    [gallery](gallery/README.md) and [`NOTICE.md`](skills/dev-icons/NOTICE.md).
    Don't edit those generated files by hand.
+4. Check the skill still works and build the upload zip:
+   ```bash
+   python source/package_skill.py
+   ```
+   This writes `dist/dev-icons.zip`, ready to upload to claude.ai for testing.
+
+### Releasing a new version
+
+1. Change `version` in both [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)
+   and [`package.json`](package.json), for example to `1.0.1`. Claude Code users only get
+   the update when this number changes.
+2. Commit and push, then tag the release:
+   ```bash
+   git tag v1.0.1
+   git push origin v1.0.1
+   ```
+3. GitHub Actions checks the skill and publishes a release with `dev-icons.zip` attached.
 
 ### How the repo is laid out
 
 | Path | What it is |
 |---|---|
-| `skills/dev-icons/` | **The skill itself.** This is the only folder users install. |
-| `source/` | The icon list and the build script. Not part of the skill. |
+| `skills/dev-icons/` | **The skill itself.** This is the only folder claude.ai users upload. |
+| `.claude-plugin/` | Makes the repo installable as a Claude Code plugin. |
+| `source/` | The icon list, build script and packaging script. Not part of the skill. |
 | `gallery/` | Browsable icon previews for GitHub. Not part of the skill. |
+| `.github/workflows/` | Checks the skill on every push and publishes releases. |
 
 All the tiles are packed into one file (`tiles.bin`) because claude.ai skill uploads
 allow at most 200 files and no archives inside the upload.
