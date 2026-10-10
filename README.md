@@ -1,3 +1,5 @@
+![pro-icons-skill: 190+ tech and brand logo tiles in 3 themes, for stack banners, slide PNGs and animated intros](assets/banner.gif)
+
 # dev-icons
 
 A skill that gives Claude about 190 tech and brand logos (languages, frameworks, cloud,
