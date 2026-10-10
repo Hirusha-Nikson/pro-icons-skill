@@ -43,22 +43,42 @@ You need **Code execution and file creation** turned on in Settings.
 
 ### Claude Code
 
-Install it as a plugin. In a Claude Code session, run:
+Install it as a plugin.
+
+**In the VS Code extension:**
+
+1. In the Claude Code chat box, type `/plugins` (with an **s**) and press Enter.
+   The **Manage plugins** dialog opens.
+2. Go to the **Marketplaces** tab, enter `Hirusha-Nikson/pro-icons-skill` and add it.
+   It shows up as **pro-icons**.
+3. Switch to the **Plugins** tab, find **Dev Icons** (`dev-icons`) and click **Install**.
+4. Choose the scope that installs it for you in all your projects, not
+   **Install locally**, which only covers the current repository.
+
+Or paste this link into your browser to open VS Code straight at the install screen:
+
+```
+vscode://anthropic.claude-code/install-plugin?plugin=dev-icons&marketplace=Hirusha-Nikson/pro-icons-skill
+```
+
+**In Claude Code in a terminal,** run these in a session:
 
 ```
 /plugin marketplace add Hirusha-Nikson/pro-icons-skill
 /plugin install dev-icons@pro-icons
 ```
 
-Or from your terminal:
+Or from your shell:
 
 ```bash
 claude plugin marketplace add Hirusha-Nikson/pro-icons-skill
 claude plugin install dev-icons@pro-icons
 ```
 
-Start a new session afterwards so the skill is loaded. To get later versions, run
-`/plugin marketplace update pro-icons`, or turn on auto-update under **Marketplaces** in `/plugin`.
+Start a new conversation afterwards so the skill is loaded. It appears as
+`dev-icons:dev-icons`. To get later versions, refresh the **pro-icons** marketplace in
+the **Marketplaces** tab (VS Code), or run `/plugin marketplace update pro-icons`
+(terminal).
 
 <details>
 <summary>Install without the plugin system</summary>
