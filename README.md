@@ -35,13 +35,24 @@ right script and gives you the file.
 
 ### claude.ai
 
-You need **Code execution and file creation** turned on in Settings.
+You need **Code execution and file creation** turned on in Settings. Plugins need a paid
+plan (Pro, Max, Team or Enterprise).
+
+1. Open **Customize** in the left sidebar and go to the **Plugins** tab.
+2. Click **Add**, choose **Add marketplace**, and under **Add from a repository** enter
+   `Hirusha-Nikson/pro-icons-skill`.
+3. Open the **Discover** tab, find **Dev Icons** and click **Add**, then start a new chat.
+
+<details>
+<summary><b>Having trouble adding the plugin? Upload the skill instead.</b></summary>
 
 1. Download **[dev-icons.zip](https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip)**
    from the latest release.
 2. In claude.ai, go to **Settings → Capabilities → Skills**, click **Upload skill** and
    choose `dev-icons.zip`.
 3. Make sure the skill is switched on, then start a new chat.
+
+</details>
 
 ### Claude Code
 
