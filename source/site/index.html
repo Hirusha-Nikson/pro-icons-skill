@@ -87,6 +87,10 @@ h2 { font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -.02em; line-height: 1
 .panel li { margin: 6px 0; }
 .panel p { margin: 0 0 14px; }
 .note { font-size: 14px; color: var(--muted); }
+.alt { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.alt summary { color: var(--accent); font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.alt[open] summary { margin-bottom: 14px; }
+.alt p { margin: 0; }
 .code { position: relative; margin: 0 0 14px; }
 .code pre { margin: 0; padding: 14px 52px 14px 16px; background: var(--code-bg); color: var(--code-text); border-radius: 10px; overflow-x: auto; line-height: 1.7; }
 .copy {
@@ -230,11 +234,21 @@ footer p { margin: 4px 0; }
       <div class="panel" role="tabpanel" id="panel-web" aria-labelledby="tab-web" hidden>
         <ol>
           <li>Turn on <strong>Code execution and file creation</strong> in claude.ai Settings.</li>
-          <li>Download <a href="https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip">dev-icons.zip</a> from the latest release.</li>
-          <li>Go to <strong>Settings → Capabilities → Skills</strong>, click <strong>Upload skill</strong> and choose the zip.</li>
-          <li>Make sure the skill is switched on, then start a new chat.</li>
+          <li>Open <strong>Customize</strong> in the left sidebar and go to the <strong>Plugins</strong> tab.</li>
+          <li>Click <strong>Add</strong>, choose <strong>Add marketplace</strong>, and under <strong>Add from a repository</strong> enter <code>Hirusha-Nikson/pro-icons-skill</code>.</li>
+          <li>Open the <strong>Discover</strong> tab, find <strong>Dev Icons</strong> and click <strong>Add</strong>, then start a new chat.</li>
         </ol>
-        <p><a class="btn primary" href="https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip">Download dev-icons.zip</a></p>
+        <p class="note">Plugins need a paid plan (Pro, Max, Team or Enterprise).</p>
+        <details class="alt">
+          <summary>Having trouble adding the plugin? Upload the skill instead.</summary>
+          <ol>
+            <li>Turn on <strong>Code execution and file creation</strong> in claude.ai Settings.</li>
+            <li>Download <a href="https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip">dev-icons.zip</a> from the latest release.</li>
+            <li>Go to <strong>Settings → Capabilities → Skills</strong>, click <strong>Upload skill</strong> and choose the zip.</li>
+            <li>Make sure the skill is switched on, then start a new chat.</li>
+          </ol>
+          <p><a class="btn primary" href="https://github.com/Hirusha-Nikson/pro-icons-skill/releases/latest/download/dev-icons.zip">Download dev-icons.zip</a></p>
+        </details>
       </div>
 
       <div class="panel" role="tabpanel" id="panel-term" aria-labelledby="tab-term" hidden>
